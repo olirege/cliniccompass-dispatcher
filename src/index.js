@@ -1,17 +1,76 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
-
+import App from './App';
+import AuthProvider from './auth/auth_provider';
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
+import Root from './routes/root';
+import ErrorView from './views/ErrorView';
+import LoginView from './views/LoginView';
+import SubscribeView from './views/SubscribeView';
+import DashboardView from './views/DashboardView';
+import CallCenterView from './views/CallCenterView';
+import UserStatsView from './views/UserStatsView';
+import FeedbackView from './views/FeedbackView';
+import VideoCallView from './views/VideoCallView';
+import ChatCallView from './views/ChatCallView';
 const root = ReactDOM.createRoot(document.getElementById('root'));
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: ( 
+      <AuthProvider>
+          <Root />
+      </AuthProvider>
+      ),
+    errorElement: <ErrorView />,
+    children: [
+      {
+        path: "login",
+        element: (
+            <LoginView />
+        ),
+      },
+      {
+        path: "signup",
+        element: <SubscribeView />,
+      },
+      {
+        path: "dashboard",
+        element: <DashboardView />,
+      },
+      {
+        path: "callcenter",
+        element: <CallCenterView />,
+      },
+      {
+        path: "stats",
+        element: <UserStatsView />,
+      },
+      {
+        path: "feedback",
+        element: <FeedbackView />,
+      },
+      {
+        path: "videocall",
+        element: <VideoCallView />,
+      },
+      {
+        path: "chat",
+        element: <ChatCallView />,
+      },
+    ]
+  },
+]);
 root.render(
   <React.StrictMode>
-    <App />
+      <RouterProvider router={router}>
+            <App />
+      </RouterProvider>
   </React.StrictMode>
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();

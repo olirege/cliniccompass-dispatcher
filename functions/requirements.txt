@@ -1,0 +1,5 @@
+firebase_functions~=0.1.0
+jsonschema~=4.2.0
+requests~=2.31.0
+python-dotenv~=1.0.0
+agora-token-builder~=1.0.0
